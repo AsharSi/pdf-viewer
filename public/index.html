@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Upload and View</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link href="./dist/output.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            max-width: 400px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="flex items-start justify-start min-h-screen bg-black text-white">
+
+        <div class="sidebar flex flex-col items-center gap-6 p-4 border-r-2 h-screen  ">
+            <form id="viewForm" class="flex rounded-full overflow-hidden    ">
+                <input type="text" id="pdfId" placeholder="Search by ID" class="p-2 text-black" required />
+                <button type="submit" class="bg-green-600 p-2">Search</button>
+            </form>
+            <ul id="pdfList" class="overflow-y-auto h-screen">
+            </ul>
+        </div>
+
+        <div class="w-full">
+            <div id="pdfViewer" style="display: none;" class="h-screen">
+                <iframe id="pdfFrame" class="w-full h-screen" width="600px" height="600px"></iframe>
+            </div>
+            <!-- 
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input type="file" name="file" accept="application/pdf" required />
+                <button type="submit">Upload PDF</button>
+            </form> -->
+
+
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
