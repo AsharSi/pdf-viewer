@@ -23,7 +23,7 @@ mongoose.connect(mongoUri, {
 });
 
 // Define a schema
-const pdfSchema = new mongoose.Schema({
+const cvSchema = new mongoose.Schema({
     pdf: {
         type: Buffer,
         required: true
@@ -31,7 +31,7 @@ const pdfSchema = new mongoose.Schema({
 });
 
 // Create a model
-const Pdf = mongoose.model('Pdf', pdfSchema);
+const Cv = mongoose.model('Cv', cvSchema);
 
 // Setup Multer for file uploads
 const storage = multer.memoryStorage();
@@ -44,8 +44,8 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => {
             return res.status(400).send('No file uploaded');
         }
 
-        const newPdf = new Pdf({ pdf: req.file.buffer });
-        await newPdf.save();
+        const newCv = new Cv({ pdf: req.file.buffer });
+        await newCv.save();
 
         res.status(201).send('PDF uploaded successfully');
     } catch (error) {
@@ -56,7 +56,7 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => {
 // Endpoint to get PDF
 app.get('/get-pdf/:id', async (req, res) => {
     try {
-        const pdfDoc = await Pdf.findById(req.params.id);
+        const pdfDoc = await Cv.findById(req.params.id);
         if (pdfDoc) {
             res.setHeader('Content-Type', 'application/pdf');
             res.send(pdfDoc.pdf);
@@ -71,8 +71,8 @@ app.get('/get-pdf/:id', async (req, res) => {
 // Endpoint to get all PDF IDs  
 app.get('/get-pdfs', async (req, res) => {
     try {
-        const pdfs = await Pdf.find({}, '_id');
-        res.status(200).json(pdfs);
+        const cvs = await Cv.find({}, '_id');
+        res.status(200).json(cvs);
     } catch (error) {
         res.status(500).send(error.message);
     }
