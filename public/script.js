@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // const uploadForm = document.getElementById('uploadForm');
+    const uploadForm = document.getElementById('uploadForm');
     const viewForm = document.getElementById('viewForm');
     const pdfList = document.getElementById('pdfList');
     const pdfViewer = document.getElementById('pdfViewer');
@@ -39,24 +39,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // // Function to handle PDF upload form submission
-    // uploadForm.addEventListener('submit', async function (event) {
-    //     event.preventDefault();
-    //     const formData = new FormData(this);
-    //     try {
-    //         const response = await fetch('http://localhost:3000/upload-pdf', {
-    //             method: 'POST',
-    //             body: formData
-    //         });
-    //         if (!response.ok) {
-    //             throw new Error('Failed to upload PDF');
-    //         }
-    //         await fetchPdfIds(); // Update PDF list after successful upload
-    //         this.reset(); // Reset form fields
-    //     } catch (error) {
-    //         console.error('Error uploading PDF:', error);
-    //     }
-    // });
+    // Function to handle PDF upload form submission
+    uploadForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        try {
+            const response = await fetch('/upload-pdf', {
+                method: 'POST',
+                body: formData
+            });
+            if (!response.ok) {
+                throw new Error('Failed to upload PDF');
+            }
+            await fetchPdfIds(); // Update PDF list after successful upload
+            this.reset(); // Reset form fields
+        } catch (error) {
+            console.error('Error uploading PDF:', error);
+        }
+    });
 
     // Function to handle PDF view form submission
     viewForm.addEventListener('submit', async function (event) {
