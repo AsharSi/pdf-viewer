@@ -14,9 +14,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             const pdfs = await response.json();
             pdfList.innerHTML = ''; // Clear previous list
+            let num = 0;
             pdfs.forEach(pdf => {
                 const li = document.createElement('li');
-                li.textContent = pdf._id;
+                li.textContent = num + 1;
+                num++;
                 li.style.cursor = 'pointer';
                 pdfList.appendChild(li);
 
